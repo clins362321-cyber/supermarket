@@ -5,6 +5,7 @@ import org.example.supermarket.admin.Admin;
 import org.example.supermarket.admin.AdminMapper;
 import org.example.supermarket.user.User;
 import org.example.supermarket.user.UserMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.nio.charset.StandardCharsets;
@@ -12,17 +13,19 @@ import java.time.Instant;
 import java.util.Base64;
 
 /**
- * 登录校验服务（基于 MyBatis-Plus 查询 admin / user 表）
+ * 登录校验服务（基于 MyBatis-Plus 查询 admin / user 表，密码使用 BCrypt 哈希比对）
  */
 @Service
 public class AuthService {
 
     private final AdminMapper adminMapper;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public AuthService(AdminMapper adminMapper, UserMapper userMapper) {
+    public AuthService(AdminMapper adminMapper, UserMapper userMapper, PasswordEncoder passwordEncoder) {
         this.adminMapper = adminMapper;
         this.userMapper = userMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     /**
@@ -37,7 +40,7 @@ public class AuthService {
             Admin admin = adminMapper.selectOne(
                     new QueryWrapper<Admin>().eq("username", username)
             );
-            if (admin != null && admin.getPassword().equals(password)) {
+            if (admin != null && passwordEncoder.matches(password, admin.getPassword())) {
                 return LoginResponse.ok("admin", generateToken(username, "admin"));
             }
             return LoginResponse.fail("管理员账号或密码错误");
@@ -45,7 +48,7 @@ public class AuthService {
             User user = userMapper.selectOne(
                     new QueryWrapper<User>().eq("username", username)
             );
-            if (user != null && user.getPassword().equals(password)) {
+            if (user != null && passwordEncoder.matches(password, user.getPassword())) {
                 return LoginResponse.ok("user", generateToken(username, "user"));
             }
             return LoginResponse.fail("用户账号或密码错误");

@@ -28,6 +28,31 @@ public class Order {
      */
     private LocalDateTime createdAt;
 
+    /**
+     * 收货地址ID
+     */
+    private Long addressId;
+
+    /**
+     * 配送状态：PENDING_ACCEPT(待接单)、IN_DELIVERY(配送中)、DELIVERED(已签收)、EXCEPTION(异常)
+     */
+    private String deliveryStatus;
+
+    /**
+     * 配送员ID
+     */
+    private Long deliveryPersonId;
+
+    /**
+     * 配送路线ID
+     */
+    private Long deliveryRouteId;
+
+    /**
+     * 配送备注（异常时填写）
+     */
+    private String deliveryRemark;
+
     public Long getId() {
         return id;
     }
@@ -59,5 +84,16 @@ public class Order {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
+
+    public Long getAddressId() { return addressId; }
+    public void setAddressId(Long addressId) { this.addressId = addressId; }
+    public String getDeliveryStatus() { return deliveryStatus; }
+    public void setDeliveryStatus(String deliveryStatus) { this.deliveryStatus = deliveryStatus; }
+    public Long getDeliveryPersonId() { return deliveryPersonId; }
+    public void setDeliveryPersonId(Long deliveryPersonId) { this.deliveryPersonId = deliveryPersonId; }
+    public Long getDeliveryRouteId() { return deliveryRouteId; }
+    public void setDeliveryRouteId(Long deliveryRouteId) { this.deliveryRouteId = deliveryRouteId; }
+    public String getDeliveryRemark() { return deliveryRemark; }
+    public void setDeliveryRemark(String deliveryRemark) { this.deliveryRemark = deliveryRemark; }
 }
 

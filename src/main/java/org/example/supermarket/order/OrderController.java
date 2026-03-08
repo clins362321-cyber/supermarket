@@ -87,6 +87,7 @@ public class OrderController {
         order.setUsername(dto.getUsername().trim());
         order.setTotalPrice(total);
         order.setCreatedAt(LocalDateTime.now());
+        order.setDeliveryStatus("PENDING_ACCEPT");
         orderMapper.insert(order);
 
         // 创建订单明细并扣减库存

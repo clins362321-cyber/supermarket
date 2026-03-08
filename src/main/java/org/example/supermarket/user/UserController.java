@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.example.supermarket.user.dto.UserProfileDto;
 import org.example.supermarket.user.dto.UserProfileUpdateDto;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,10 +18,12 @@ public class UserController {
 
     private final UserMapper userMapper;
     private final UserAddressMapper addressMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserController(UserMapper userMapper, UserAddressMapper addressMapper) {
+    public UserController(UserMapper userMapper, UserAddressMapper addressMapper, PasswordEncoder passwordEncoder) {
         this.userMapper = userMapper;
         this.addressMapper = addressMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping
@@ -37,12 +40,15 @@ public class UserController {
     @PostMapping
     public User create(@Valid @RequestBody User user) {
         user.setId(null);
+        if (user.getPassword() != null && !user.getPassword().isBlank()) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         userMapper.insert(user);
         return user;
     }
 
     /**
-     * 用户注册：与 create 类似，但单独暴露一个注册接口，便于前端调用
+     * 用户注册：与 create 类似，但单独暴露一个注册接口，便于前端调用（密码使用 BCrypt 哈希存储）
      */
     @PostMapping("/register")
     public ResponseEntity<User> register(@Valid @RequestBody User user) {
@@ -58,6 +64,7 @@ public class UserController {
         if (cnt != null && cnt > 0) {
             return ResponseEntity.badRequest().build();
         }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userMapper.insert(user);
         return ResponseEntity.ok(user);
     }
@@ -69,7 +76,9 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
         existing.setUsername(user.getUsername());
-        existing.setPassword(user.getPassword());
+        if (user.getPassword() != null && !user.getPassword().isBlank()) {
+            existing.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
         userMapper.updateById(existing);
         return ResponseEntity.ok(existing);
     }

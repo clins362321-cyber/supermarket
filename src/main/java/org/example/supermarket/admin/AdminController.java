@@ -3,6 +3,7 @@ package org.example.supermarket.admin;
 import jakarta.validation.Valid;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,9 +15,11 @@ import java.util.List;
 public class AdminController {
 
     private final AdminMapper adminMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public AdminController(AdminMapper adminMapper) {
+    public AdminController(AdminMapper adminMapper, PasswordEncoder passwordEncoder) {
         this.adminMapper = adminMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping
@@ -33,6 +36,9 @@ public class AdminController {
     @PostMapping
     public Admin create(@Valid @RequestBody Admin admin) {
         admin.setId(null);
+        if (admin.getPassword() != null && !admin.getPassword().isBlank()) {
+            admin.setPassword(passwordEncoder.encode(admin.getPassword()));
+        }
         adminMapper.insert(admin);
         return admin;
     }
@@ -44,7 +50,9 @@ public class AdminController {
             return ResponseEntity.notFound().build();
         }
         existing.setUsername(admin.getUsername());
-        existing.setPassword(admin.getPassword());
+        if (admin.getPassword() != null && !admin.getPassword().isBlank()) {
+            existing.setPassword(passwordEncoder.encode(admin.getPassword()));
+        }
         adminMapper.updateById(existing);
         return ResponseEntity.ok(existing);
     }

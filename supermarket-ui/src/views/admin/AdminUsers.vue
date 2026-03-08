@@ -196,14 +196,14 @@ onMounted(loadAll)
 
 .panel {
   border-radius: 14px;
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  background: rgba(15, 23, 42, 0.92);
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
   padding: 14px;
 }
 
 .panel-title {
   font-weight: 600;
-  color: #e5e7eb;
+  color: #111827;
   margin-bottom: 12px;
 }
 
@@ -218,9 +218,9 @@ input {
   width: 100%;
   height: 36px;
   border-radius: 10px;
-  border: 1px solid rgba(148, 163, 184, 0.25);
-  background: rgba(2, 6, 23, 0.55);
-  color: #e5e7eb;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #111827;
   padding: 0 10px;
   box-sizing: border-box;
   outline: none;
@@ -230,19 +230,21 @@ input {
   height: 34px;
   padding: 0 12px;
   border-radius: 10px;
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  background: rgba(2, 6, 23, 0.45);
-  color: #e5e7eb;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  color: #374151;
 }
 
 .btn.primary {
-  border-color: rgba(34, 197, 94, 0.45);
-  background: rgba(34, 197, 94, 0.16);
+  border-color: #22c55e;
+  background: #dcfce7;
+  color: #166534;
 }
 
 .btn.danger {
-  border-color: rgba(248, 113, 113, 0.4);
-  background: rgba(248, 113, 113, 0.14);
+  border-color: #f87171;
+  background: #fee2e2;
+  color: #991b1b;
 }
 
 .btn.small {
@@ -253,13 +255,13 @@ input {
 
 .error {
   margin: 10px 0 0;
-  color: #fca5a5;
+  color: #dc2626;
   font-size: 12px;
 }
 
 .hint {
   margin-top: 8px;
-  color: #94a3b8;
+  color: #6b7280;
   font-size: 13px;
 }
 
@@ -281,12 +283,12 @@ input {
   align-items: center;
   padding: 10px;
   border-radius: 12px;
-  border: 1px solid rgba(148, 163, 184, 0.14);
-  background: rgba(2, 6, 23, 0.35);
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
 }
 
 .tr.head {
-  color: #94a3b8;
+  color: #6b7280;
   font-size: 12px;
   background: transparent;
   border-color: transparent;
