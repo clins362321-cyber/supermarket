@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>仓储管理 - 高保真原型</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; color: #111827; }
+    .nav-bar { background: #1e3a5f; color: #fff; padding: 12px 24px; display: flex; gap: 24px; }
+    .nav-bar a { color: #93c5fd; text-decoration: none; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+    .page-title { font-size: 20px; font-weight: 600; margin-bottom: 20px; }
+    .card { background: #fff; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); padding: 20px; margin-bottom: 20px; }
+    .card-title { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+    th { background: #f9fafb; color: #6b7280; font-weight: 500; }
+    .btn { display: inline-block; padding: 8px 16px; border-radius: 8px; font-size: 14px; cursor: pointer; border: none; text-decoration: none; margin-right: 8px; }
+    .btn-primary { background: #2563eb; color: #fff; }
+    .btn-warning { background: #f59e0b; color: #fff; }
+    .status-alert { background: #fee2e2; color: #991b1b; padding: 4px 10px; border-radius: 6px; font-size: 12px; }
+    .toolbar { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  </style>
+</head>
+<body>
+  <nav class="nav-bar">
+    <span style="font-weight:600">生鲜超市物流配送系统</span>
+    <a href="index.html">首页</a>
+    <a href="procurement.html">采购管理</a>
+    <a href="warehouse.html" style="color:#fff">仓储管理</a>
+    <a href="delivery.html">配送管理</a>
+    <a href="system.html">系统管理</a>
+  </nav>
+
+  <div class="container">
+    <div class="page-title">仓储管理</div>
+    <div class="grid-2">
+      <div class="card" id="alert">
+        <div class="card-title">库存预警（5 条待处理）</div>
+        <table>
+          <tr><th>商品</th><th>当前库存</th><th>安全库存</th><th>缺口</th><th>建议采购</th><th>操作</th></tr>
+          <tr>
+            <td>新鲜苹果</td><td>80</td><td>100</td><td>20</td><td>200</td>
+            <td><button class="btn btn-primary">发起采购</button></td>
+          </tr>
+          <tr>
+            <td>有机牛奶</td><td>45</td><td>80</td><td>35</td><td>100</td>
+            <td><button class="btn btn-primary">发起采购</button></td>
+          </tr>
+          <tr>
+            <td>有机蔬菜</td><td>30</td><td>50</td><td>20</td><td>80</td>
+            <td><button class="btn btn-primary">发起采购</button></td>
+          </tr>
+        </table>
+      </div>
+      <div class="card" id="inbound">
+        <div class="card-title">今日入库</div>
+        <div class="toolbar">
+          <button class="btn btn-primary">新建入库</button>
+        </div>
+        <table>
+          <tr><th>入库单号</th><th>类型</th><th>商品数</th><th>状态</th><th>操作</th></tr>
+          <tr><td>IN202503070001</td><td>采购入库</td><td>3</td><td>已完成</td><td><a href="#">查看</a></td></tr>
+          <tr><td>IN202503070002</td><td>采购入库</td><td>2</td><td>待确认</td><td><a href="#">确认</a></td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">库存查询</div>
+      <div class="toolbar">
+        <input type="text" placeholder="搜索商品" style="padding:8px 12px;border-radius:8px;border:1px solid #d1d5db;width:200px">
+        <button class="btn btn-primary">查询</button>
+      </div>
+      <table>
+        <tr><th>商品</th><th>当前库存</th><th>安全库存</th><th>库位</th><th>最近入库</th><th>最近出库</th></tr>
+        <tr>
+          <td>新鲜苹果</td><td>80</td><td>100</td><td>A区-01-02</td><td>03-07 09:00</td><td>03-07 14:30</td>
+        </tr>
+        <tr>
+          <td>有机牛奶</td><td>45</td><td>80</td><td>B区-02-01</td><td>03-06 10:00</td><td>03-07 11:00</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

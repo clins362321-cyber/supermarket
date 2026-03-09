@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>采购管理 - 高保真原型</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; color: #111827; }
+    .nav-bar { background: #1e3a5f; color: #fff; padding: 12px 24px; display: flex; align-items: center; gap: 24px; }
+    .nav-bar a { color: #93c5fd; text-decoration: none; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+    .page-title { font-size: 20px; font-weight: 600; margin-bottom: 20px; }
+    .card { background: #fff; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); padding: 20px; margin-bottom: 20px; }
+    .card-title { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+    th { background: #f9fafb; color: #6b7280; font-weight: 500; }
+    .btn { display: inline-block; padding: 8px 16px; border-radius: 8px; font-size: 14px; cursor: pointer; border: none; text-decoration: none; margin-right: 8px; }
+    .btn-primary { background: #2563eb; color: #fff; }
+    .btn-secondary { background: #e5e7eb; color: #374151; }
+    .status { padding: 4px 10px; border-radius: 6px; font-size: 12px; }
+    .status-pending { background: #fef3c7; color: #92400e; }
+    .status-approved { background: #d1fae5; color: #065f46; }
+    .status-rejected { background: #fee2e2; color: #991b1b; }
+    .toolbar { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+    .sidebar { width: 180px; background: #fff; border-radius: 12px; padding: 16px; margin-right: 24px; }
+    .sidebar-item { padding: 10px 12px; border-radius: 8px; margin-bottom: 4px; cursor: pointer; }
+    .sidebar-item.active { background: #eff6ff; color: #2563eb; }
+    .layout { display: flex; }
+    .main { flex: 1; min-width: 0; }
+  </style>
+</head>
+<body>
+  <nav class="nav-bar">
+    <span style="font-weight:600">生鲜超市物流配送系统</span>
+    <a href="index.html">首页</a>
+    <a href="procurement.html" style="color:#fff">采购管理</a>
+    <a href="warehouse.html">仓储管理</a>
+    <a href="delivery.html">配送管理</a>
+    <a href="system.html">系统管理</a>
+  </nav>
+
+  <div class="container">
+    <div class="page-title">采购管理</div>
+    <div class="layout">
+      <div class="sidebar">
+        <div class="sidebar-item active">我的申请</div>
+        <div class="sidebar-item">待我审批</div>
+        <div class="sidebar-item">采购订单</div>
+        <div class="sidebar-item">供应商档案</div>
+      </div>
+      <div class="main">
+        <div class="card" id="apply">
+          <div class="card-title">我的采购申请</div>
+          <div class="toolbar">
+            <button class="btn btn-primary">新建申请</button>
+            <select style="padding:8px 12px;border-radius:8px;border:1px solid #d1d5db"><option>全部状态</option></select>
+            <input type="text" placeholder="搜索单号" style="padding:8px 12px;border-radius:8px;border:1px solid #d1d5db;width:200px">
+          </div>
+          <table>
+            <thead>
+              <tr><th>申请单号</th><th>申请时间</th><th>商品</th><th>数量</th><th>供应商</th><th>状态</th><th>当前节点</th><th>操作</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>PA202503070001</td>
+                <td>2025-03-07 09:30</td>
+                <td>新鲜苹果、有机牛奶</td>
+                <td>200、50</td>
+                <td>XX生鲜供应商</td>
+                <td><span class="status status-pending">审批中</span></td>
+                <td>待财务审批</td>
+                <td><a href="#" class="btn btn-secondary">查看</a></td>
+              </tr>
+              <tr>
+                <td>PA202503060002</td>
+                <td>2025-03-06 14:20</td>
+                <td>有机蔬菜</td>
+                <td>100</td>
+                <td>YY蔬菜基地</td>
+                <td><span class="status status-approved">已通过</span></td>
+                <td>-</td>
+                <td><a href="#" class="btn btn-secondary">查看</a></td>
+              </tr>
+              <tr>
+                <td>PA202503050003</td>
+                <td>2025-03-05 11:00</td>
+                <td>冷冻海鲜</td>
+                <td>30</td>
+                <td>ZZ冷链</td>
+                <td><span class="status status-rejected">已驳回</span></td>
+                <td>采购主管驳回</td>
+                <td><a href="#" class="btn btn-secondary">修改</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card">
+          <div class="card-title">审批流程图（示例：PA202503070001）</div>
+          <div style="display:flex;align-items:center;gap:16px;padding:20px;background:#f9fafb;border-radius:8px;">
+            <div style="text-align:center;padding:12px 20px;background:#d1fae5;border-radius:8px;">采购员提交<br><small>03-07 09:30</small></div>
+            <span>→</span>
+            <div style="text-align:center;padding:12px 20px;background:#d1fae5;border-radius:8px;">采购主管通过<br><small>03-07 10:15</small></div>
+            <span>→</span>
+            <div style="text-align:center;padding:12px 20px;background:#fef3c7;border-radius:8px;">财务审批中<br><small>当前节点</small></div>
+            <span>→</span>
+            <div style="text-align:center;padding:12px 20px;background:#e5e7eb;border-radius:8px;">总经理待审批</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

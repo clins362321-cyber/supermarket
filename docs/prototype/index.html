@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生鲜超市物流配送系统 - 高保真原型</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; color: #111827; }
+    .nav-bar { background: #1e3a5f; color: #fff; padding: 12px 24px; display: flex; align-items: center; gap: 24px; }
+    .nav-bar a { color: #93c5fd; text-decoration: none; }
+    .nav-bar a:hover { color: #fff; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+    .page-title { font-size: 20px; font-weight: 600; margin-bottom: 20px; }
+    .card { background: #fff; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); padding: 20px; margin-bottom: 20px; }
+    .card-title { font-size: 16px; font-weight: 600; margin-bottom: 16px; border-bottom: 1px solid #e5e7eb; padding-bottom: 12px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+    th { background: #f9fafb; color: #6b7280; font-weight: 500; }
+    .btn { display: inline-block; padding: 8px 16px; border-radius: 8px; font-size: 14px; cursor: pointer; border: none; text-decoration: none; }
+    .btn-primary { background: #2563eb; color: #fff; }
+    .btn-secondary { background: #e5e7eb; color: #374151; }
+    .btn-success { background: #22c55e; color: #fff; }
+    .btn-danger { background: #ef4444; color: #fff; }
+    .status { padding: 4px 10px; border-radius: 6px; font-size: 12px; }
+    .status-pending { background: #fef3c7; color: #92400e; }
+    .status-approved { background: #d1fae5; color: #065f46; }
+    .status-rejected { background: #fee2e2; color: #991b1b; }
+    .status-delivering { background: #dbeafe; color: #1e40af; }
+    .toolbar { display: flex; gap: 12px; margin-bottom: 16px; flex-wrap: wrap; }
+    .sidebar { width: 220px; background: #fff; border-radius: 12px; padding: 16px; }
+    .sidebar-item { padding: 10px 12px; border-radius: 8px; margin-bottom: 4px; cursor: pointer; }
+    .sidebar-item:hover, .sidebar-item.active { background: #eff6ff; color: #2563eb; }
+    .layout { display: flex; gap: 24px; }
+    .main { flex: 1; min-width: 0; }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 13px; color: #6b7280; margin-bottom: 6px; }
+    .form-group input, .form-group select { width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 8px; font-size: 14px; }
+    .modal { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.4); align-items: center; justify-content: center; z-index: 100; }
+    .modal.show { display: flex; }
+    .modal-content { background: #fff; border-radius: 12px; padding: 24px; min-width: 400px; max-width: 90%; }
+    .modal-title { font-size: 18px; font-weight: 600; margin-bottom: 20px; }
+    .modal-actions { display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px; }
+    .breadcrumb { font-size: 13px; color: #6b7280; margin-bottom: 16px; }
+    .breadcrumb a { color: #2563eb; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <nav class="nav-bar">
+    <span style="font-weight:600">生鲜超市物流配送系统</span>
+    <a href="index.html">首页</a>
+    <a href="procurement.html">采购管理</a>
+    <a href="warehouse.html">仓储管理</a>
+    <a href="delivery.html">配送管理</a>
+    <a href="system.html">系统管理</a>
+  </nav>
+
+  <div class="container">
+    <div class="page-title">系统首页 - 工作台</div>
+    <div class="grid-2">
+      <div class="card">
+        <div class="card-title">待办事项</div>
+        <table>
+          <tr><th>类型</th><th>数量</th><th>操作</th></tr>
+          <tr><td>待我审批（采购）</td><td>3</td><td><a href="procurement.html" class="btn btn-primary">去处理</a></td></tr>
+          <tr><td>库存预警</td><td>5</td><td><a href="warehouse.html#alert" class="btn btn-primary">去处理</a></td></tr>
+          <tr><td>待分配配送</td><td>8</td><td><a href="delivery.html" class="btn btn-primary">去处理</a></td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <div class="card-title">今日概览</div>
+        <table>
+          <tr><th>指标</th><th>数值</th></tr>
+          <tr><td>今日入库单</td><td>12</td></tr>
+          <tr><td>今日出库单</td><td>28</td></tr>
+          <tr><td>今日配送完成</td><td>45</td></tr>
+          <tr><td>库存预警商品</td><td>5</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">快捷入口</div>
+      <div class="toolbar">
+        <a href="procurement.html#apply" class="btn btn-primary">新建采购申请</a>
+        <a href="warehouse.html#inbound" class="btn btn-secondary">采购入库</a>
+        <a href="delivery.html#assign" class="btn btn-secondary">配送分配</a>
+        <a href="system.html#users" class="btn btn-secondary">用户管理</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

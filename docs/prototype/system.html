@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>系统管理 - 高保真原型</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f7fa; color: #111827; }
+    .nav-bar { background: #1e3a5f; color: #fff; padding: 12px 24px; display: flex; gap: 24px; }
+    .nav-bar a { color: #93c5fd; text-decoration: none; }
+    .container { max-width: 1400px; margin: 0 auto; padding: 24px; }
+    .page-title { font-size: 20px; font-weight: 600; margin-bottom: 20px; }
+    .card { background: #fff; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); padding: 20px; margin-bottom: 20px; }
+    .card-title { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid #e5e7eb; }
+    th { background: #f9fafb; color: #6b7280; font-weight: 500; }
+    .btn { display: inline-block; padding: 8px 16px; border-radius: 8px; font-size: 14px; cursor: pointer; border: none; text-decoration: none; margin-right: 8px; }
+    .btn-primary { background: #2563eb; color: #fff; }
+    .btn-secondary { background: #e5e7eb; color: #374151; }
+    .layout { display: flex; gap: 24px; }
+    .sidebar { width: 180px; background: #fff; border-radius: 12px; padding: 16px; }
+    .sidebar-item { padding: 10px 12px; border-radius: 8px; margin-bottom: 4px; }
+    .sidebar-item.active { background: #eff6ff; color: #2563eb; }
+    .main { flex: 1; min-width: 0; }
+  </style>
+</head>
+<body>
+  <nav class="nav-bar">
+    <span style="font-weight:600">生鲜超市物流配送系统</span>
+    <a href="index.html">首页</a>
+    <a href="procurement.html">采购管理</a>
+    <a href="warehouse.html">仓储管理</a>
+    <a href="delivery.html">配送管理</a>
+    <a href="system.html" style="color:#fff">系统管理</a>
+  </nav>
+
+  <div class="container">
+    <div class="page-title">系统管理</div>
+    <div class="layout">
+      <div class="sidebar">
+        <div class="sidebar-item">角色权限</div>
+        <div class="sidebar-item active">用户管理</div>
+        <div class="sidebar-item">操作审计</div>
+        <div class="sidebar-item">基础数据</div>
+        <div class="sidebar-item">系统配置</div>
+      </div>
+      <div class="main">
+        <div class="card" id="users">
+          <div class="card-title">用户管理</div>
+          <div style="margin-bottom:16px">
+            <button class="btn btn-primary">新增用户</button>
+            <input type="text" placeholder="搜索用户名" style="padding:8px 12px;border-radius:8px;border:1px solid #d1d5db;width:200px;margin-left:12px">
+          </div>
+          <table>
+            <tr><th>用户名</th><th>姓名</th><th>部门</th><th>角色</th><th>状态</th><th>操作</th></tr>
+            <tr><td>admin</td><td>系统管理员</td><td>-</td><td>超级管理员</td><td>启用</td><td><a href="#">编辑</a></td></tr>
+            <tr><td>buyer01</td><td>采购员张三</td><td>采购部</td><td>采购员</td><td>启用</td><td><a href="#">编辑</a></td></tr>
+            <tr><td>warehouse01</td><td>仓储李四</td><td>仓储部</td><td>仓储管理员</td><td>启用</td><td><a href="#">编辑</a></td></tr>
+            <tr><td>dispatcher01</td><td>调度王五</td><td>配送部</td><td>配送调度员</td><td>启用</td><td><a href="#">编辑</a></td></tr>
+          </table>
+        </div>
+        <div class="card">
+          <div class="card-title">角色权限配置（示例：采购员）</div>
+          <div style="display:flex;gap:40px;flex-wrap:wrap;">
+            <div>
+              <div style="font-weight:500;margin-bottom:8px">菜单权限</div>
+              <div style="font-size:13px;color:#6b7280">
+                ✓ 采购管理-我的申请<br>✓ 采购管理-待我审批<br>✓ 仓储管理-库存查询<br>✗ 系统管理
+              </div>
+            </div>
+            <div>
+              <div style="font-weight:500;margin-bottom:8px">数据权限</div>
+              <div style="font-size:13px;color:#6b7280">仅本人数据</div>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-title">操作审计（最近 10 条）</div>
+          <table>
+            <tr><th>时间</th><th>操作人</th><th>模块</th><th>操作</th><th>IP</th></tr>
+            <tr><td>2025-03-07 15:30</td><td>admin</td><td>用户管理</td><td>新增用户</td><td>192.168.1.100</td></tr>
+            <tr><td>2025-03-07 14:20</td><td>buyer01</td><td>采购管理</td><td>提交采购申请</td><td>192.168.1.101</td></tr>
+            <tr><td>2025-03-07 11:00</td><td>warehouse01</td><td>仓储管理</td><td>确认入库</td><td>192.168.1.102</td></tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
