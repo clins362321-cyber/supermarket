@@ -16,7 +16,7 @@ const activeTab = ref(route.query.tab === 'pending' ? 'pending' : route.query.ta
 
 const username = () => localStorage.getItem('username') || ''
 const canApprove = computed(() => {
-  const r = localStorage.getItem('adminRole') || ''
+  const r = (localStorage.getItem('adminRole') || '').toUpperCase()
   return r === 'ADMIN' || r === 'APPROVER'
 })
 

@@ -43,6 +43,7 @@ const handleSubmit = async () => {
     // 简单保存一下 token 和角色，后续可以扩展
     localStorage.setItem('token', data.token || '')
     localStorage.setItem('role', data.role || role.value)
+    localStorage.setItem('adminRole', data.role || '')
     localStorage.setItem('username', username.value)
 
     if (data.role === 'admin') {
@@ -138,9 +139,9 @@ const handleSubmit = async () => {
   width: 100%;
   max-width: 420px;
   padding: 32px 32px 28px;
-  border-radius: 16px;
+  border-radius: 12px;
   background: #ffffff;
-  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   border: 1px solid #e5e7eb;
   box-sizing: border-box;
 }
@@ -235,15 +236,13 @@ const handleSubmit = async () => {
 .login-btn {
   margin-top: 4px;
   height: 38px;
-  border-radius: 999px;
+  border-radius: 8px;
   border: none;
   background: #2563eb;
   color: #ffffff;
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
-  transition: transform 0.1s ease, box-shadow 0.15s ease, opacity 0.15s ease;
-  box-shadow: 0 14px 30px rgba(22, 163, 74, 0.45);
 }
 
 .login-btn:disabled {

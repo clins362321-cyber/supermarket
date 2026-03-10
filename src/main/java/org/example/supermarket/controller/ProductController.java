@@ -30,6 +30,11 @@ public class ProductController {
         return productService.list();
     }
 
+    @GetMapping("/commented-by-user")
+    public List<Long> commentedByUser(@RequestParam String username) {
+        return productService.getCommentedProductIdsByUser(username);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<ProductDetailDto> detail(@PathVariable Long id) {
         ProductDetailDto dto = productService.getDetail(id);

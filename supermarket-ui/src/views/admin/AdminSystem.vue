@@ -14,6 +14,7 @@ const userForm = ref({ username: '', password: '' })
 const editingAdmin = ref(null)
 
 const ROLE_MAP = { ADMIN: '超级管理员', APPROVER: '采购审批员', WAREHOUSE: '仓储管理员' }
+const getRoleName = (role) => ROLE_MAP[role] || role || '超级管理员'
 
 const loadAdmins = async () => {
   try {
@@ -157,21 +158,19 @@ onMounted(loadAll)
           </div>
           <table class="admin-table">
             <thead>
-              <tr><th>用户名</th><th>类型</th><th>角色</th><th>操作</th></tr>
+              <tr><th>用户名</th><th>角色</th><th>操作</th></tr>
             </thead>
             <tbody>
               <tr v-for="a in admins" :key="'a'+a.id">
                 <td>{{ a.username }}</td>
-                <td>管理员</td>
-                <td>{{ ROLE_MAP[a.role] || a.role }}</td>
+                <td>{{ getRoleName(a.role) }}</td>
                 <td>
                   <button class="admin-btn admin-btn-secondary admin-btn-small" @click="openEditAdmin(a)">改角色</button>
                 </td>
               </tr>
               <tr v-for="u in users" :key="'u'+u.id">
                 <td>{{ u.username }}</td>
-                <td>用户</td>
-                <td>-</td>
+                <td>普通用户</td>
                 <td></td>
               </tr>
             </tbody>

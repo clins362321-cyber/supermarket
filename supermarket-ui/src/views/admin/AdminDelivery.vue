@@ -319,10 +319,12 @@ onMounted(loadAll)
 }
 
 .panel {
-  border-radius: 14px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   border: 1px solid #e5e7eb;
   background: #ffffff;
-  padding: 14px;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
 .main-panel {
@@ -330,25 +332,27 @@ onMounted(loadAll)
 }
 
 .panel-title {
+  font-size: 16px;
   font-weight: 600;
   color: #111827;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 12px;
 }
 
 .btn {
   height: 34px;
-  padding: 0 12px;
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
-  background: #f9fafb;
+  padding: 0 16px;
+  border-radius: 8px;
+  border: none;
+  background: #e5e7eb;
   color: #374151;
   margin-bottom: 10px;
 }
 
 .btn.primary {
-  border-color: #22c55e;
-  background: #dcfce7;
-  color: #166534;
+  background: #2563eb;
+  color: #fff;
 }
 
 .btn.small {

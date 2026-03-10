@@ -1,8 +1,10 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useCart } from '../../composables/useCart'
 
 const router = useRouter()
+const { addToCart } = useCart()
 
 const loading = ref(false)
 const error = ref('')
@@ -20,31 +22,6 @@ const load = async () => {
   } finally {
     loading.value = false
   }
-}
-
-const cart = computed(() => {
-  const raw = localStorage.getItem('cart')
-  return raw ? JSON.parse(raw) : []
-})
-
-const saveCart = (next) => {
-  localStorage.setItem('cart', JSON.stringify(next))
-}
-
-const addToCart = (p) => {
-  const next = [...cart.value]
-  const idx = next.findIndex((it) => it.productId === p.id)
-  if (idx >= 0) {
-    next[idx].qty += 1
-  } else {
-    next.push({
-      productId: p.id,
-      name: p.name,
-      price: Number(p.price),
-      qty: 1,
-    })
-  }
-  saveCart(next)
 }
 
 const goDetail = (id) => {
@@ -91,10 +68,12 @@ onMounted(load)
 
 <style scoped>
 .panel {
-  border-radius: 14px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   border: 1px solid #e5e7eb;
   background: #ffffff;
-  padding: 14px;
+  padding: 20px;
+  margin-bottom: 20px;
 }
 
 .top {
@@ -124,9 +103,10 @@ onMounted(load)
 
 .card {
   border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   border: 1px solid #e5e7eb;
   background: #ffffff;
-  padding: 12px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -158,17 +138,16 @@ onMounted(load)
 
 .btn {
   height: 34px;
-  padding: 0 12px;
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
-  background: #f3f4f6;
-  color: #111827;
+  padding: 0 16px;
+  border-radius: 8px;
+  border: none;
+  background: #e5e7eb;
+  color: #374151;
 }
 
 .btn.primary {
-  border-color: #16a34a;
-  background: #22c55e;
-  color: #ffffff;
+  background: #2563eb;
+  color: #fff;
 }
 
 .error {

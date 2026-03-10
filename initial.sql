@@ -28,6 +28,7 @@ CREATE TABLE `admin` (
   `id` BIGINT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(50) NOT NULL,
   `password` VARCHAR(100) NOT NULL,
+  `role` VARCHAR(30) NOT NULL DEFAULT 'ADMIN',
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_admin_username` (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

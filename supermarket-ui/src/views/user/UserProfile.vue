@@ -265,46 +265,50 @@ onMounted(() => {
 
 <style scoped>
 .panel {
-  border-radius: 14px;
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  background: rgba(15, 23, 42, 0.92);
-  padding: 14px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  padding: 20px;
 }
 
 .panel-title {
+  font-size: 16px;
   font-weight: 600;
-  color: #e5e7eb;
-  margin-bottom: 4px;
+  color: #111827;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 12px;
 }
 
 .section {
-  margin-top: 12px;
-  padding-top: 10px;
-  border-top: 1px solid rgba(148, 163, 184, 0.2);
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e5e7eb;
 }
 
 .section-title {
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 600;
-  color: #e5e7eb;
-  margin-bottom: 8px;
+  color: #111827;
+  margin-bottom: 12px;
 }
 
 .hint {
   margin: 0 0 8px;
-  color: #94a3b8;
+  color: #6b7280;
   font-size: 13px;
 }
 
 .error {
   margin: 0 0 6px;
-  color: #fca5a5;
+  color: #dc2626;
   font-size: 12px;
 }
 
 .success {
   margin: 0 0 6px;
-  color: #4ade80;
+  color: #16a34a;
   font-size: 12px;
 }
 
@@ -316,21 +320,21 @@ onMounted(() => {
 }
 
 .field .label {
-  font-size: 12px;
-  color: #9ca3af;
-  margin-bottom: 4px;
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 6px;
 }
 
 input {
   width: 100%;
-  border-radius: 10px;
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  background: rgba(2, 6, 23, 0.7);
-  color: #e5e7eb;
-  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: #fff;
+  color: #111827;
+  padding: 10px 12px;
   box-sizing: border-box;
   outline: none;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 input:disabled {
@@ -348,54 +352,55 @@ input:disabled {
 }
 
 .field.inline label {
-  font-size: 12px;
-  color: #cbd5e1;
+  font-size: 13px;
+  color: #6b7280;
 }
 
 .actions {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   flex-wrap: wrap;
-  margin-top: 4px;
+  margin-top: 8px;
 }
 
 .btn {
-  height: 32px;
-  padding: 0 12px;
-  border-radius: 9px;
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  background: rgba(2, 6, 23, 0.45);
-  color: #e5e7eb;
-  font-size: 13px;
+  height: 34px;
+  padding: 0 16px;
+  border-radius: 8px;
+  border: none;
+  background: #e5e7eb;
+  color: #374151;
+  font-size: 14px;
 }
 
 .btn.primary {
-  border-color: rgba(34, 197, 94, 0.45);
-  background: rgba(34, 197, 94, 0.16);
+  background: #2563eb;
+  color: #fff;
 }
 
 .btn.danger {
-  border-color: rgba(248, 113, 113, 0.4);
-  background: rgba(248, 113, 113, 0.14);
+  background: #ef4444;
+  color: #fff;
 }
 
 .btn.small {
   height: 30px;
-  padding: 0 10px;
+  padding: 6px 12px;
+  font-size: 13px;
 }
 
 .addr-list {
-  margin-top: 8px;
+  margin-top: 12px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .addr-item {
-  border-radius: 10px;
-  border: 1px solid rgba(148, 163, 184, 0.24);
-  background: rgba(2, 6, 23, 0.6);
-  padding: 8px 10px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  padding: 12px 14px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -412,8 +417,8 @@ input:disabled {
   flex-wrap: wrap;
   gap: 8px;
   align-items: center;
-  font-size: 13px;
-  color: #e5e7eb;
+  font-size: 14px;
+  color: #111827;
 }
 
 .addr-line .name {
@@ -421,26 +426,26 @@ input:disabled {
 }
 
 .addr-line .phone {
-  color: #cbd5e1;
+  color: #6b7280;
 }
 
 .tag {
-  padding: 0 6px;
-  border-radius: 999px;
-  background: rgba(34, 197, 94, 0.18);
-  color: #bbf7d0;
-  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: #d1fae5;
+  color: #065f46;
+  font-size: 12px;
 }
 
 .addr-detail {
-  margin-top: 2px;
-  font-size: 12px;
-  color: #cbd5e1;
+  margin-top: 4px;
+  font-size: 13px;
+  color: #6b7280;
 }
 
 .addr-ops {
   display: flex;
-  gap: 6px;
+  gap: 8px;
 }
 
 @media (max-width: 900px) {

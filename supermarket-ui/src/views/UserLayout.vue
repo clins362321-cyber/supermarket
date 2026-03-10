@@ -1,9 +1,11 @@
 <script setup>
-import { computed, ref, watchEffect } from 'vue'
+import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { useCart } from '../composables/useCart'
 
 const route = useRoute()
 const router = useRouter()
+const { cartCount } = useCart()
 
 const title = computed(() => {
   if (route.path.startsWith('/user/shop/')) {
@@ -18,112 +20,74 @@ const title = computed(() => {
   return map[route.path] || '用户首页'
 })
 
-const cartCount = ref(0)
-watchEffect(() => {
-  const raw = localStorage.getItem('cart')
-  const cart = raw ? JSON.parse(raw) : []
-  cartCount.value = cart.reduce((sum, it) => sum + (it.qty || 0), 0)
-})
-
 const logout = () => {
   localStorage.removeItem('token')
   localStorage.removeItem('role')
+  localStorage.removeItem('username')
   router.push('/login')
 }
 </script>
 
 <template>
-  <div class="layout">
-    <aside class="sidebar">
-      <div class="brand">
-        <div class="brand-title">生鲜配送系统</div>
-        <div class="brand-subtitle">用户</div>
-      </div>
+  <div class="user-layout">
+    <nav class="nav-bar">
+      <span class="nav-brand">生鲜超市物流配送系统</span>
+      <RouterLink class="nav-link" to="/user/shop">商城</RouterLink>
+      <RouterLink class="nav-link" to="/user/cart">
+        购物车 <span class="badge">{{ cartCount }}</span>
+      </RouterLink>
+      <RouterLink class="nav-link" to="/user/profile">个人信息</RouterLink>
+      <RouterLink class="nav-link" to="/user/after-sales">售后</RouterLink>
+      <button class="nav-logout" type="button" @click="logout">退出登录</button>
+    </nav>
 
-      <nav class="nav">
-        <RouterLink class="nav-item" to="/user/profile">个人信息</RouterLink>
-        <RouterLink class="nav-item" to="/user/shop">商城</RouterLink>
-        <RouterLink class="nav-item" to="/user/cart">
-          购物车 <span class="badge">{{ cartCount }}</span>
-        </RouterLink>
-        <RouterLink class="nav-item" to="/user/after-sales">售后</RouterLink>
-      </nav>
-
-      <button class="logout" type="button" @click="logout">退出登录</button>
-    </aside>
-
-    <section class="main">
-      <header class="header">
-        <div class="header-title">{{ title }}</div>
-      </header>
+    <div class="container">
+      <div class="page-title">{{ title }}</div>
       <main class="content">
         <RouterView />
       </main>
-    </section>
+    </div>
   </div>
 </template>
 
 <style scoped>
-.layout {
+.user-layout {
   min-height: 100vh;
-  display: grid;
-  grid-template-columns: 260px 1fr;
   background: #f5f7fa;
-}
-
-.sidebar {
-  padding: 18px 14px;
-  border-right: 1px solid #e5e7eb;
-  background: #ffffff;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
-
-.brand {
-  padding: 12px 10px;
-  border-radius: 12px;
-  background: #ecfdf5;
-  border: 1px solid #bbf7d0;
-}
-
-.brand-title {
-  font-size: 14px;
-  font-weight: 600;
   color: #111827;
 }
 
-.brand-subtitle {
-  margin-top: 2px;
-  font-size: 12px;
-  color: #6b7280;
-}
-
-.nav {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.nav-item {
-  padding: 10px 12px;
-  border-radius: 10px;
-  color: #111827;
-  text-decoration: none;
-  border: 1px solid transparent;
-  background: transparent;
+.nav-bar {
+  background: #1e3a5f;
+  color: #fff;
+  padding: 12px 24px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
 }
 
-.nav-item.router-link-active {
-  border-color: #2563eb;
-  background: #eff6ff;
+.nav-brand {
+  font-weight: 600;
+  margin-right: 8px;
+}
+
+.nav-link {
+  color: #93c5fd;
+  text-decoration: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-link:hover,
+.nav-link.router-link-active {
+  color: #fff;
 }
 
 .badge {
-  min-width: 22px;
+  min-width: 20px;
   height: 18px;
   padding: 0 6px;
   border-radius: 999px;
@@ -131,54 +95,44 @@ const logout = () => {
   align-items: center;
   justify-content: center;
   font-size: 12px;
-  color: #0b1220;
-  background: #22c55e;
+  color: #1e3a5f;
+  background: #93c5fd;
 }
 
-.logout {
-  margin-top: auto;
+.nav-logout {
+  margin-left: auto;
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: transparent;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
 }
 
-.main {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
+.nav-logout:hover {
+  background: rgba(255, 255, 255, 0.15);
 }
 
-.header {
-  height: 56px;
-  display: flex;
-  align-items: center;
-  padding: 0 18px;
-  border-bottom: 1px solid #e5e7eb;
-  background: #ffffff;
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 24px;
 }
 
-.header-title {
-  font-size: 16px;
+.page-title {
+  font-size: 20px;
   font-weight: 600;
-  color: #111827;
+  margin-bottom: 20px;
 }
 
 .content {
-  padding: 18px;
+  min-height: 0;
 }
 
 @media (max-width: 900px) {
-  .layout {
-    grid-template-columns: 220px 1fr;
-  }
-}
-
-@media (max-width: 720px) {
-  .layout {
-    grid-template-columns: 1fr;
-  }
-
-  .sidebar {
-    border-right: none;
-    border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  .nav-bar {
+    gap: 12px;
   }
 }
 </style>
-

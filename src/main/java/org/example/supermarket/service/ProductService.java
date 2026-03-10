@@ -55,6 +55,13 @@ public class ProductService {
         return productMapper.selectList(null);
     }
 
+    public List<Long> getCommentedProductIdsByUser(String username) {
+        if (username == null || username.isBlank()) return List.of();
+        return commentMapper.selectList(
+                new QueryWrapper<ProductComment>().eq("username", username.trim())
+        ).stream().map(ProductComment::getProductId).distinct().toList();
+    }
+
     public ProductDetailDto getDetail(Long id) {
         Product product = productMapper.selectById(id);
         if (product == null) {

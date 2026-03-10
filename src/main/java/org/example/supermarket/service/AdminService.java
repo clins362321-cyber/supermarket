@@ -31,6 +31,9 @@ public class AdminService {
         if (admin.getPassword() != null && !admin.getPassword().isBlank()) {
             admin.setPassword(passwordEncoder.encode(admin.getPassword()));
         }
+        if (admin.getRole() == null || admin.getRole().isBlank()) {
+            admin.setRole("ADMIN");
+        }
         adminMapper.insert(admin);
         return admin;
     }
@@ -41,6 +44,9 @@ public class AdminService {
             return null;
         }
         existing.setUsername(admin.getUsername());
+        if (admin.getRole() != null && !admin.getRole().isBlank()) {
+            existing.setRole(admin.getRole());
+        }
         if (admin.getPassword() != null && !admin.getPassword().isBlank()) {
             existing.setPassword(passwordEncoder.encode(admin.getPassword()));
         }

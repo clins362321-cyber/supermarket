@@ -7,6 +7,9 @@ import UserLayout from './views/UserLayout.vue'
 import AdminProducts from './views/admin/AdminProducts.vue'
 import AdminUsers from './views/admin/AdminUsers.vue'
 import AdminDelivery from './views/admin/AdminDelivery.vue'
+import AdminWarehouse from './views/admin/AdminWarehouse.vue'
+import AdminProcurement from './views/admin/AdminProcurement.vue'
+import AdminSystem from './views/admin/AdminSystem.vue'
 
 import UserProfile from './views/user/UserProfile.vue'
 import UserShop from './views/user/UserShop.vue'
@@ -27,6 +30,9 @@ const routes = [
       { path: 'products/:id', component: UserProductDetail },
       { path: 'personnel', component: AdminUsers },
       { path: 'delivery', component: AdminDelivery },
+      { path: 'warehouse', component: AdminWarehouse },
+      { path: 'procurement', component: AdminProcurement },
+      { path: 'system', component: AdminSystem },
     ],
   },
   {
