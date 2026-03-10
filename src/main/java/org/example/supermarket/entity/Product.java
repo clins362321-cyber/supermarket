@@ -14,6 +14,8 @@ public class Product {
     private String description;
     private BigDecimal price;
     private Integer stock;
+    private Integer safeStock;
+
     public Long getId() {
         return id;
     }
@@ -52,5 +54,13 @@ public class Product {
 
     public void setStock(Integer stock) {
         this.stock = stock;
+    }
+
+    public Integer getSafeStock() {
+        return safeStock;
+    }
+
+    public void setSafeStock(Integer safeStock) {
+        this.safeStock = safeStock;
     }
 }
