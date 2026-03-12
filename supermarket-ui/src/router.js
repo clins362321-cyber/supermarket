@@ -10,6 +10,7 @@ import AdminDelivery from './views/admin/AdminDelivery.vue'
 import AdminWarehouse from './views/admin/AdminWarehouse.vue'
 import AdminProcurement from './views/admin/AdminProcurement.vue'
 import AdminSystem from './views/admin/AdminSystem.vue'
+import AdminAfterSales from './views/admin/AdminAfterSales.vue'
 
 import UserProfile from './views/user/UserProfile.vue'
 import UserShop from './views/user/UserShop.vue'
@@ -33,6 +34,7 @@ const routes = [
       { path: 'warehouse', component: AdminWarehouse },
       { path: 'procurement', component: AdminProcurement },
       { path: 'system', component: AdminSystem },
+      { path: 'after-sales', component: AdminAfterSales },
     ],
   },
   {

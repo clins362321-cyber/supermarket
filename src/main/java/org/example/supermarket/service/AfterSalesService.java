@@ -74,4 +74,23 @@ public class AfterSalesService {
                 .orderByDesc("created_at", "id")
         );
     }
+
+    public List<AfterSales> listAll() {
+        return afterSalesMapper.selectList(
+            new QueryWrapper<AfterSales>().orderByDesc("created_at", "id")
+        );
+    }
+
+    public AfterSales updateStatus(Long id, String status) {
+        AfterSales as = afterSalesMapper.selectById(id);
+        if (as == null) throw new IllegalArgumentException("售后记录不存在");
+        if (status == null || status.isBlank()) throw new IllegalArgumentException("状态不能为空");
+        String s = status.trim().toUpperCase();
+        if (!"PENDING".equals(s) && !"PROCESSING".equals(s) && !"CLOSED".equals(s) && !"REJECTED".equals(s)) {
+            throw new IllegalArgumentException("无效状态，可选：PENDING、PROCESSING、CLOSED、REJECTED");
+        }
+        as.setStatus(s);
+        afterSalesMapper.updateById(as);
+        return as;
+    }
 }

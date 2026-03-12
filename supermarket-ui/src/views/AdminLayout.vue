@@ -16,6 +16,7 @@ const title = computed(() => {
     '/admin/warehouse': '仓储管理',
     '/admin/procurement': '采购管理',
     '/admin/system': '系统管理',
+    '/admin/after-sales': '售后管理',
   }
   return map[route.path] || '管理员首页'
 })
@@ -38,6 +39,7 @@ const logout = () => {
       <RouterLink class="nav-link" to="/admin/delivery">配送管理</RouterLink>
       <RouterLink class="nav-link" to="/admin/warehouse">仓储管理</RouterLink>
       <RouterLink class="nav-link" to="/admin/procurement">采购管理</RouterLink>
+      <RouterLink class="nav-link" to="/admin/after-sales">售后管理</RouterLink>
       <RouterLink class="nav-link" to="/admin/system">系统管理</RouterLink>
       <button class="nav-logout" type="button" @click="logout">退出登录</button>
     </nav>

@@ -32,4 +32,19 @@ public class AfterSalesController {
     public List<AfterSales> listByUser(@RequestParam String username) {
         return afterSalesService.listByUser(username);
     }
+
+    @GetMapping
+    public List<AfterSales> listAll() {
+        return afterSalesService.listAll();
+    }
+
+    @PutMapping("/{id}/status")
+    public ResponseEntity<?> updateStatus(@PathVariable Long id, @RequestParam String status) {
+        try {
+            AfterSales as = afterSalesService.updateStatus(id, status);
+            return ResponseEntity.ok(as);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }
